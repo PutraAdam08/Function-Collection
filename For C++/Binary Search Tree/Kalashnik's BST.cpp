@@ -15,7 +15,7 @@ using namespace std;
 /* Node structure */
 
 struct BSTNode {
-    BSTNode *left, *right;
+    BSTNode *left, *right, *parent;
     int key;
 };
 
@@ -131,10 +131,14 @@ private:
         if (root == NULL)
             return __createNode(value);
         
-        if (value < root->key)
+        if (value < root->key){
             root->left = __insert(root->left, value);
-        else if (value > root->key)
+            root->left->parent = root;
+        }
+        else if (value > root->key){
             root->right = __insert(root->right, value);
+            root->right->parent = root;
+        }
         
         return root;
     }
