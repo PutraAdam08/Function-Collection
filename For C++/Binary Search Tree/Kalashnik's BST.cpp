@@ -80,6 +80,10 @@ struct BST {
         int dist2 = distanceToAncestor(lca, q);
         return dist1 + dist2;
     }
+    
+     int getNodeLevel(int val) {
+        return __getNodeLevelHelper(_root, val, 1);
+     }
 
     void traverseInorder() {
         __inorder(_root);
@@ -189,6 +193,20 @@ private:
         }
         return (left != NULL) ? left : right;
     }
+    
+    int __getNodeLevelHelper(BSTNode* root, int val, int level) {
+        if (root == NULL) {
+            return 0;
+        }
+        if (root->key == val) {
+            return level;
+        }
+        int leftLevel = __getNodeLevelHelper(root->left, val, level + 1);
+        if (leftLevel != 0) {
+            return leftLevel;
+        }
+        return __getNodeLevelHelper(root->right, val, level + 1);
+    }
 
     void __inorder(BSTNode *root) {
         if (root) {
@@ -241,6 +259,13 @@ int main(int argc, char const *argv[])
     puts("");
 
     cout << getHeight(set._root) << endl;
+    
+    int level = set.getNodeLevel(6);
+    if (level != 0) {
+        cout << "Node level: " << level << std::endl; // Output: Node level: 2
+    } else {
+        cout << "Node not found" << std::endl;
+    }
     
     BSTNode* node1 = set.search(set._root, 8);
     BSTNode* node2 = set.search(set._root, 12);
