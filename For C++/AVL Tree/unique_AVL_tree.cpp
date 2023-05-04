@@ -192,6 +192,22 @@ private:
             _inorder(node->right);
         }
     }
+    
+    void _postorder(AVLNode *node) {
+        if (node) {
+            _postorder(node->left);
+            _postorder(node->right);
+            printf("%d ", node->key);
+        }
+    }
+
+    void _preorder(BSTNode *node) {
+        if (node) {
+            printf("%d ", node->key);
+            _preorder(node->left);
+            _preorder(node->right);
+        }
+    }
 
 public:
     void init() {
@@ -228,6 +244,14 @@ public:
 
     void inorder() {
         this->_inorder(_root);
+    }
+    
+    void preorder() {
+        this->_preorder(_root);
+    }
+    
+    void postorder() {
+        this->_postorder(_root);
     }
 };
 
