@@ -7,8 +7,8 @@
     For C++
 */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include<bits/stdc++.h>
+using namespace std;
 
 struct AVLNode {
     int data;
