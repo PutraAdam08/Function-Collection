@@ -126,6 +126,18 @@ private:
         
         return node;
     }
+    
+    AVLNode* _findLCA(AVLNode* root, AVLNode* p,AVLNode* q) {
+        if (root == NULL || p == root || q == root) {
+            return root;
+        }
+        AVLNode* left = _findLCA(root->left, p, q);
+        AVLNode* right = _findLCA(root->right, p, q);
+        if (left != NULL && right != NULL) {
+            return root;
+        }
+        return (left != NULL) ? left : right;
+    }
 
     AVLNode* _findMinNode(AVLNode *node) {
         AVLNode *currNode = node;
@@ -197,13 +209,13 @@ private:
         if (node) {
             _postorder(node->left);
             _postorder(node->right);
-            printf("%d ", node->key);
+            printf("%d ", node->data);
         }
     }
 
-    void _preorder(BSTNode *node) {
+    void _preorder(AVLNode *node) {
         if (node) {
-            printf("%d ", node->key);
+            printf("%d ", node->data);
             _preorder(node->left);
             _preorder(node->right);
         }
